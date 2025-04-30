@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Family Feud Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Family Feud</h1>
+  <div id="question"></div>
+  <div id="answers"></div>
+  <div id="controls">
+    <button onclick="nextQuestion()">Next Question</button>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
