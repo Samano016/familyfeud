@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>100 Estudiantes Dijeron</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- START SCREEN -->
+  <section id="startScreen" class="screen active">
+    <div class="start-box">
+      <div class="school-badge">PUMA</div>
+
+      <h1>
+        100 ESTUDIANTES<br>
+        DIJERON
+      </h1>
+
+      <p>El juego de preguntas de nuestra escuela</p>
+
+      <button id="startBtn" class="main-btn">
+        COMENZAR
+      </button>
+    </div>
+  </section>
+
+
+  <!-- QUESTION SELECTION -->
+  <section id="questionScreen" class="screen">
+
+    <div class="top-header">
+      <h2>SELECCIONA UNA PREGUNTA</h2>
+
+      <button id="backToStartBtn" class="small-btn">
+        ← INICIO
+      </button>
+    </div>
+
+    <div class="filters">
+
+      <div class="category-buttons">
+        <button class="category-btn active" data-category="Todas">
+          Todas
+        </button>
+
+        <button class="category-btn" data-category="Escuela">
+          Escuela
+        </button>
+
+        <button class="category-btn" data-category="Vida Estudiantil">
+          Vida Estudiantil
+        </button>
+
+        <button class="category-btn" data-category="Diversión">
+          Diversión
+        </button>
+      </div>
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Buscar pregunta..."
+      >
+
+    </div>
+
+    <div id="questionList" class="question-list"></div>
+
+  </section>
+
+
+  <!-- GAME SCREEN -->
+  <section id="gameScreen" class="screen">
+
+    <!-- HEADER -->
+    <header class="game-header">
+
+      <div class="team-score team-a" id="teamABox">
+        <span>ESTUDIANTES</span>
+        <strong id="scoreA">0</strong>
+      </div>
+
+      <div class="game-title">
+        <h1>100 ESTUDIANTES DIJERON</h1>
+
+        <div id="roundPoints">
+          0 PUNTOS
+        </div>
+
+        <div id="currentTurn" class="current-turn">
+          TURNO: ESTUDIANTES
+        </div>
+      </div>
+
+      <div class="team-score team-b" id="teamBBox">
+        <span>MAESTROS</span>
+        <strong id="scoreB">0</strong>
+      </div>
+
+    </header>
+
+    <div class="multiplier-container">
+  <span>MULTIPLICADOR:</span>
+  <button class="mult-btn active" data-mult="1">x1</button>
+  <button class="mult-btn" data-mult="2">x2 (Doble)</button>
+  <button class="mult-btn" data-mult="3">x3 (Triple)</button>
+</div>
+
+    <!-- GAME MAIN -->
+    <main class="game-main">
+
+      <!-- QUESTION -->
+      <div class="question-box">
+
+        <div class="question-label">
+          PREGUNTA
+        </div>
+
+        <h2 id="questionText">
+          Pregunta
+        </h2>
+
+      </div>
+
+
+      <!-- TIMER -->
+      <div class="timer-container">
+
+        <div class="timer-label">
+          TIEMPO
+        </div>
+
+        <div id="timer" class="timer">
+          <span id="timer-seconds">12</span>
+        </div>
+
+      </div>
+
+
+      <!-- ANSWERS -->
+      <div id="answers" class="answers-grid"></div>
+
+
+      <!-- CONTROLS -->
+      <div class="game-controls">
+
+        <div class="strike-area">
+
+          <div id="strike1" class="strike">
+            X
+          </div>
+
+          <div id="strike2" class="strike">
+            X
+          </div>
+
+          <div id="strike3" class="strike">
+            X
+          </div>
+
+        </div>
+
+
+
+        <div class="game-buttons">
+
+          <button id="correctBtn" class="control-btn correct-btn">
+            ✓ ACIERTO
+          </button>
+
+          <button id="strikeBtn" class="control-btn strike-btn">
+            X STRIKE
+          </button>
+
+          <button id="switchTeamBtn" class="control-btn switch-team-btn">
+            ⇄ CAMBIAR EQUIPO
+          </button>
+
+          <button id="resetRoundBtn" class="control-btn">
+            ↻ REINICIAR
+          </button>
+
+          <button id="changeQuestionBtn" class="control-btn">
+            ← PREGUNTAS
+          </button>
+
+        </div>
+
+
+        <div class="controls-info">
+
+          <p>
+            <strong>1–5</strong>
+            Revelar respuesta
+          </p>
+
+          <p>
+            <strong>ESPACIO</strong>
+            Siguiente respuesta
+          </p>
+
+          <p>
+            <strong>A</strong>
+            Acierto
+          </p>
+
+          <p>
+            <strong>X</strong>
+            Strike
+          </p>
+
+          <p>
+            <strong>T</strong>
+            Cambiar equipo
+          </p>
+
+          <p>
+            <strong>R</strong>
+            Reiniciar ronda
+          </p>
+
+          <p>
+            <strong>Q</strong>
+            Cambiar pregunta
+          </p>
+
+        </div>
+
+      </div>
+
+    </main>
+
+
+    <!-- STEAL MODAL -->
+    <div id="stealModal" class="modal hidden">
+
+      <div class="modal-box steal-box">
+
+        <div class="big-x">
+          X
+        </div>
+
+        <h2>
+          ¡TRES STRIKES!
+        </h2>
+
+        <div class="steal-message">
+          TURNO DEL OTRO EQUIPO
+          <br>
+          PARA ROBAR PUNTOS
+        </div>
+
+        <div class="steal-teams">
+
+          <div class="steal-team">
+            <span>EQUIPO ORIGINAL</span>
+            <strong id="originalTeamName">
+              ESTUDIANTES
+            </strong>
+          </div>
+
+          <div class="steal-arrow">
+            →
+          </div>
+
+          <div class="steal-team">
+            <span>OPORTUNIDAD DE ROBAR</span>
+            <strong id="stealingTeamName">
+              MAESTROS
+            </strong>
+          </div>
+
+        </div>
+
+        <div class="steal-points">
+          <span>PUNTOS EN JUEGO</span>
+          <strong id="stealPoints">
+            0
+          </strong>
+        </div>
+
+        <p class="steal-instruction">
+          El otro equipo tendrá una sola oportunidad.
+        </p>
+
+        <button id="returnToGameBtn" class="return-game-btn">
+          ← VOLVER AL JUEGO
+        </button>
+
+        <div class="steal-decision-buttons">
+
+          <button id="giveStealPointsBtn" class="give-points-btn">
+            ✓ DAR PUNTOS AL OTRO EQUIPO
+          </button>
+
+          <button id="keepPointsBtn" class="keep-points-btn">
+            ✕ NO DAR PUNTOS
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ROUND END MODAL -->
+    <div id="roundModal" class="modal hidden">
+
+      <div class="modal-box">
+
+        <div id="roundResultIcon" class="round-result-icon">
+          ✓
+        </div>
+
+        <h2 id="roundResultTitle">
+          RONDA TERMINADA
+        </h2>
+
+        <p id="roundResultText">
+          Resultado de la ronda
+        </p>
+
+        <div class="round-final-score">
+          <strong id="roundFinalPoints">
+            0
+          </strong>
+
+          <span>PUNTOS</span>
+        </div>
+
+        <button id="nextQuestionBtn" class="main-btn">
+          SIGUIENTE PREGUNTA
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
